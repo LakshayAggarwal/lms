@@ -10,6 +10,10 @@ const DB = new Sequelize('lmsDb', 'root', 'root', {
     storage: './lms.db'
 })
 
+/**
+ *  Database Models
+ * 
+ */
 const Course = DB.define('courses', {
     name: {
         type: Sequelize.STRING,
@@ -52,6 +56,37 @@ const Student = DB.define('students', {
     }
 })
 
+/** 
+ * Relationships 
+ */
+
+// One to many Courses:Batches
+Course.hasMany(Batch)
+Batch.belongsTo(Course)
+
+// One to many Batches:Lectures
+Batch.hasMany(Lecture)
+Lecture.belongsTo(Batch)
+
+// One to many Courses:Subjects
+Course.hasMany(Subject)
+Subject.belongsTo(Course)
+
+// One to many Subjects:Teachers
+Subject.hasMany(Teacher)
+Teacher.belongsTo(Subject)
+
+// One to One Lectures:Teachers
+Lecture.belongsTo(Teacher)
+
+// many to many Students:Batches
+Batch.belongsToMany(Student)
+Student.belongsToMany(Batch)
+
+
+/**
+ * Database Sync
+ */
 DB.sync()
     .then(() => {
         force: true
