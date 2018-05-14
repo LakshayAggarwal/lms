@@ -1,5 +1,8 @@
 const route = require('express').Router()
 
+/**
+ * Get requests
+ */
 route.get('/', (req, res) => {
     res.send('courses')
 })
