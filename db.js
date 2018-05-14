@@ -91,6 +91,12 @@ Teacher.belongsTo(Subject)
 // One to One Lectures:Teachers
 Lecture.belongsTo(Teacher)
 
+// One to many Subject:Lectures
+Subject.hasMany(Lecture)
+Lecture.belongsTo(Subject)
+
+// many to many Batches:Teachers
+
 // many to many Students:Batches
 Batch.belongsToMany(Student, {
     through: 'batch-student',
