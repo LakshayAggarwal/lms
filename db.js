@@ -19,13 +19,17 @@ const Course = DB.define('courses', {
         type: Sequelize.STRING,
         allowNull: false
     }
+}, {
+    timestamps: false
 })
 
 const Batch = DB.define('batches', {
     name: {
-        name: Sequelize.STRING,
+        type: Sequelize.STRING,
         allowNull: false
     }
+}, {
+    timestamps: false
 })
 
 const Subject = DB.define('subjects', {
@@ -33,6 +37,8 @@ const Subject = DB.define('subjects', {
         type: Sequelize.STRING,
         allowNull: false
     }
+}, {
+    timestamps: false
 })
 
 const Teacher = DB.define('teachers', {
@@ -40,6 +46,8 @@ const Teacher = DB.define('teachers', {
         type: Sequelize.STRING,
         allowNull: false
     }
+}, {
+    timestamps: false
 })
 
 const Lecture = DB.define('lectures', {
@@ -47,6 +55,8 @@ const Lecture = DB.define('lectures', {
         type: Sequelize.STRING,
         allowNull: false
     }
+}, {
+    timestamps: false
 })
 
 const Student = DB.define('students', {
@@ -54,6 +64,8 @@ const Student = DB.define('students', {
         type: Sequelize.STRING,
         allowNull: false
     }
+}, {
+    timestamps: false
 })
 
 /** 
@@ -80,8 +92,14 @@ Teacher.belongsTo(Subject)
 Lecture.belongsTo(Teacher)
 
 // many to many Students:Batches
-Batch.belongsToMany(Student)
-Student.belongsToMany(Batch)
+Batch.belongsToMany(Student, {
+    through: 'batch-student',
+    timestamps: false
+})
+Student.belongsToMany(Batch, {
+    through: 'batch-student',
+    timestamps: false
+})
 
 
 /**
