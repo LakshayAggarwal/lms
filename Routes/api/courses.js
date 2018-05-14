@@ -35,4 +35,28 @@ route.get('/:courseId/batches/:batchId/teachers', (req, res) => {
     res.send('courses/id/batches/id/teachers')
 })
 
+/**
+ *  POST requests
+ */
+// Add new course to database
+route.post('/', (req, res) => {
+
+})
+
+/**
+ * PUT requests
+ */
+// Update Course with given course Id
+route.put('/:courseId', (req, res) => {
+
+})
+
+/**
+ * DELETE requests
+ */
+// Delete Course with given course Id
+route.delete('/:courseId', (req, res) => {
+
+})
+
 module.exports = route

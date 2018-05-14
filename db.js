@@ -68,6 +68,14 @@ const Student = DB.define('students', {
     timestamps: false
 })
 
+const SubTeachMap = DB.define('sub-teach-map', {}, {
+    timestamps: false
+})
+
+const StudentBatchMap = DB.define('student-batch-map', {}, {
+    timestamps: false
+})
+
 /** 
  * Relationships 
  */
@@ -80,30 +88,18 @@ Batch.belongsTo(Course)
 Batch.hasMany(Lecture)
 Lecture.belongsTo(Batch)
 
-// One to many Courses:Subjects
-Course.hasMany(Subject)
-Subject.belongsTo(Course)
-
-// One to many Subjects:Teachers
-Subject.hasMany(Teacher)
-Teacher.belongsTo(Subject)
-
-// One to One Lectures:Teachers
-Lecture.belongsTo(Teacher)
-
-// One to many Subject:Lectures
-Subject.hasMany(Lecture)
-Lecture.belongsTo(Subject)
-
-// many to many Batches:Teachers
+// Subject - teacher map
+Subject.hasMany(SubTeachMap)
+SubTeachMap.belongsTo(Subject)
+Teacher.hasOne(SubTeachMap)
 
 // many to many Students:Batches
 Batch.belongsToMany(Student, {
-    through: 'batch-student',
+    through: StudentBatchMap,
     timestamps: false
 })
 Student.belongsToMany(Batch, {
-    through: 'batch-student',
+    through: StudentBatchMap,
     timestamps: false
 })
 
